@@ -73,3 +73,32 @@ class Solution {
         return ret.toString();
     }
 }
+
+//看参考答案后自己写的答案
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+        List<StringBuilder> ans = new ArrayList<>();
+        for (int i = 0; i < Math.min(numRows, s.length()); i++) {
+            ans.add(new StringBuilder());
+        }
+        boolean goingDown = false;
+        int curRow = 0;
+        
+        for (char ch : s.toCharArray()) {
+            if (curRow == 0 || curRow == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            ans.get(curRow).append(ch);
+            curRow += goingDown? 1 : -1;                        
+        }
+        
+        String result = "";
+        for (StringBuilder sb : ans) {
+            result += sb.toString();
+        }
+        return result;
+    }
+}
