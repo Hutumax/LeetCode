@@ -48,3 +48,35 @@ class Solution {
         }
     }
 }
+
+
+//Time Complexity O(n^2)
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        int n = nums.length;
+        int[] pre = new int[n];
+        int[] dp = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+            pre[i] = i;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j] && dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
+                }
+            }
+        }
+        
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] > max) {
+                max = dp[i];
+            }
+        }
+        return max;
+    }
+}
